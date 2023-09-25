@@ -56,6 +56,7 @@ class InputFormWidget:
     name_input: Any
     filepath_input: Any
     description_input: Any
+    conda_input: Any
     spinner: Any
     button_widget: Any
     framework: Any
@@ -249,6 +250,9 @@ def get_input_form_widget():
         description_input=pn.widgets.TextAreaInput(
             name="Description", css_classes=["custom-font"]
         ),
+        conda_input=pn.widgets.TextInput(
+            name="Conda Environment Path", css_classes=["custom-font"]
+        ),
         spinner=pn.indicators.LoadingSpinner(
             size=30, value=True, color="secondary", bgcolor="dark", visible=True
         ),
@@ -262,6 +266,7 @@ def get_input_form_widget():
         input_form_widget.name_input,
         input_form_widget.filepath_input,
         input_form_widget.description_input,
+        input_form_widget.conda_input,
         input_form_widget.framework,
         input_form_widget.button_widget,
         width=400,
@@ -277,18 +282,23 @@ def _create_server(event, input_form_widget, input_form, username):
     name = input_form_widget.name_input.value
     filepath = input_form_widget.filepath_input.value
     description = input_form_widget.description_input.value
+    conda_env = input_form_widget.conda_input.value
     framework = input_form_widget.framework.value
     print(
         f"Name: {name}, Filepath: {filepath}, Description: {description}, framework: {framework}"
     )
     hclient = HubClient()
+
     params = {
         "name": input_form_widget.name_input.value,
         "filepath": input_form_widget.filepath_input.value,
         "description": input_form_widget.description_input.value,
+        "python_exec": input_form_widget.conda_input.value,
         "framework": input_form_widget.framework.value,
+
     }
     edit = False
+
     if input_form_widget.button_widget.name.startswith("Edit"):
         edit = True
     try:

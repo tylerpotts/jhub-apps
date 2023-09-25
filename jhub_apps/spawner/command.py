@@ -24,10 +24,7 @@ class TString:
 
     def replace(self, **kwargs):
         template = string.Template(self.value)
-        keys_to_substitute = set()
-        for k, v in kwargs.items():
-            if f"${k}" in self.value:
-                keys_to_substitute.add(k)
+        keys_to_substitute = {k for k in kwargs if f"${k}" in self.value}
         subs = {k: v for k, v in kwargs.items() if k in keys_to_substitute}
         return template.substitute(subs)
 
@@ -88,13 +85,13 @@ COMMANDS = {
     Framework.streamlit.value: Command(
         args=[
             "--destport=0",
-            TString("$python_exec"),
+            "/Users/tylerpotts/miniconda3/envs/streamlit_test/bin/python3",
             "{-}m",
             "streamlit",
             "run",
             TString("$filepath"),
             "{--}server.port={port}",
-            "{--}server.headless=True",
+            "{--}server.headless=True", 
             TString("{--}browser.serverAddress=$origin_host"),
             "{--}browser.gatherUsageStats=false",
         ],
