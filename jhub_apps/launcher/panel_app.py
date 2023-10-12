@@ -384,6 +384,7 @@ def _create_server(event, input_form_widget, input_form, username):
     filepath = input_form_widget.filepath_input.value
     description = input_form_widget.description_input.value
     framework = input_form_widget.framework.value
+    conda_input = input_form_widget.conda_input.value
     print(
         f"Name: {display_name}, Filepath: {filepath}, Description: {description}, framework: {framework}"
     )
@@ -412,7 +413,7 @@ def _create_server(event, input_form_widget, input_form, username):
         thumbnail=thumbnail_local_filepath,
         filepath=filepath,
         framework=framework,
-        conda_env=input_form_widget.conda_input.value,
+        conda_input=conda_input,
         custom_command=input_form_widget.custom_command.value,
     )
     try:
@@ -491,6 +492,7 @@ def create_app_form_page():
         )
         input_form_widget.thumbnail.value = server.get("user_options").get("thumbnail")
         input_form_widget.framework.value = server.get("user_options").get("framework")
+        input_form_widget.conda_input.value = server.get("user_options").get("conda_input")
         input_form_widget.custom_command.value = server.get("user_options").get(
             "custom_command"
         )

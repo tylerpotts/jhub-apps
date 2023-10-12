@@ -44,7 +44,7 @@ def subclass_spawner(base_spawner):
                 else:
                     command: Command = COMMANDS.get(framework)
 
-                python_path = self._get_python_path(self.user_options.get("conda_env"))
+                python_path = self._get_python_path(self.user_options.get("conda_input"))
 
                 command_args = command.get_substituted_args(
                     python_exec=python_path,

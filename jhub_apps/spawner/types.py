@@ -17,7 +17,7 @@ class UserOptions:
     description: str
     thumbnail: str
     filepath: str
-    conda_env: str
+    conda_input: str
     framework: str
     custom_command: typing.Optional[str] = None
     env: typing.Optional[dict] = None
