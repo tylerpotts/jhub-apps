@@ -100,7 +100,7 @@ COMMANDS = {
             "streamlit",
             "run",
             TString("$filepath"),
-            "{--}server.port={port}",
+            "{--}server.port=0",
             "{--}server.headless=True",
             TString("{--}browser.serverAddress=0.0.0.0"),
             "{--}browser.gatherUsageStats=false",
